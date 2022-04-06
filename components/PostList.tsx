@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
 export default function PostList() {
-    const [posts, setPosts] = useState([]);
+    const [posts, setPosts] = useState<any[]>([]);
 
     useEffect(() => {
         fetch(`${config.base_url}/products?api_key=${config.api_key}`)
@@ -12,12 +12,12 @@ export default function PostList() {
     }, []);
 
     const listOfPosts = posts.map((post, index) => {
-        return <Text style={{ color: 'white', marginBottom: 20 }} key={index}>{post.name} : {post.stock} st</Text>
+        return <Text style={{ color: 'white', marginBottom: 20, borderWidth: 3, borderColor: 'white', padding: 5, textAlign: "center" }} key={index}>{post.name} : {post.stock} st</Text>
     })
 
     return (
         <View >
-            <Text style={{ color: 'white' }}>Produkter</Text>
+            <Text style={{ color: '#b8b8b8', fontSize: 20, textAlign: "center", margin: 20 }}>Produkter</Text>
             {listOfPosts}
         </View>
 

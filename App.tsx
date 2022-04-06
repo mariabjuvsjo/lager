@@ -9,7 +9,7 @@ export default function App() {
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView style={{ padding: 15 }}>
-        <Text style={{ fontSize: 35, color: 'white', alignItems: 'center' }} >Lager Appen!</Text>
+        <Text style={{ fontSize: 35, color: '#b8b8b8', textAlign: "center" }} >Lager Appen!</Text>
         <Image source={warehouse} style={{ width: 320, height: 240 }} />
         <PostList />
         <StatusBar style="auto" />
