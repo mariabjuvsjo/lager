@@ -1,20 +1,48 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, ScrollView, Image } from 'react-native';
+import { useState, useEffect } from 'react';
+import { StyleSheet, Text, ScrollView, Image, View } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import PostList from './components/PostList';
-import warehouse from './assets/skrew.png';
+import Home from "./components/Home";
+import Pick from "./components/Pick";
+import { NavigationContainer } from '@react-navigation/native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+
+
+const Tab = createBottomTabNavigator();
+
+
 
 // 72f9bba02fae6b6f226cf148ed5f9e8c 
 export default function App() {
+  const [products, setProducts] = useState<any[]>([]);
   return (
     <SafeAreaView style={styles.container}>
-      <ScrollView style={{ padding: 15 }}>
-        <Text style={{ fontSize: 35, color: '#b8b8b8', textAlign: "center" }} >Lager Appen!</Text>
-        <Image source={warehouse} style={{ width: 320, height: 240 }} />
-        <PostList />
-        <StatusBar style="auto" />
+      <NavigationContainer>
+        <Tab.Navigator screenOptions={
+          ({ route }) => ({
+            tabBarIcon: ({ focused, color, size }) => {
 
-      </ScrollView>
+              const routeIcons = {
+                "Lager": "home",
+                "Plock": "list",
+              };
+              let iconName = routeIcons[route.name] || "alert";
+
+              return <Ionicons name={iconName} size={size} color={color} />
+
+            }, tabBarActiveTintColor: 'blue',
+            tabBarInactiveTintColor: 'gray',
+            headerShown: false
+
+          })}>
+          <Tab.Screen name="Lager" >{() => <Home products={products} setProducts={setProducts} />}
+          </Tab.Screen>
+          <Tab.Screen name="Plock">{() => <Pick setProducts={setProducts} />}</Tab.Screen>
+        </Tab.Navigator>
+      </NavigationContainer>
+      <StatusBar style="auto" />
+
     </SafeAreaView >
   );
 }
