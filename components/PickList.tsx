@@ -20,7 +20,7 @@ export default function PickList({ route, navigation, setProducts }) {
     async function pick() {
         await orderModel.pickOrder(order);
         setProducts(await productModel.getProducts());
-        navigation.navigate("List", { reload: true });
+        navigation.navigate("Orders", { reload: true });
     }
     const orderItemsList = order.order_items.map((item, index) => {
         return <Text
@@ -28,12 +28,12 @@ export default function PickList({ route, navigation, setProducts }) {
 
     });
 
-    let isStock = false;
+    let isStock = true;
     for (let i of order.order_items) {
         for (let j of productsList) {
             if (j.name === i.name) {
-                if (j.stock >= i.amount) {
-                    isStock = true
+                if (i.stock < i.amount) {
+                    isStock = false
                 }
             }
         }

@@ -28,6 +28,7 @@
     "web": {
       "favicon": "./assets/favicon.png"
     },
-    "description": "An app to handle a warehouse"
+    "description": "An app to handle a warehouse kmom02",
+    "githubUrl": "https://github.com/mariabjuvsjo/lager.git"
   }
 }
